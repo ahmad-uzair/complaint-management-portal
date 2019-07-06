@@ -8,7 +8,7 @@ The frontend has been developed with Vue based on the following template:
 The backend is developed with Node and Express using MongoDB as the database
 
 
-##Features
+#Features
 
 Authentication: User/Admin login with credentials stored in the database. Going to user Passport for authentication but running on my own authentication method as passport kept giving Bad Request
 
