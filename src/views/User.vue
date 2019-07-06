@@ -4,7 +4,7 @@
                 class="section page-header header-filter"
                 :style="headerStyle"
         >
-            <h3 class="title">Welcome {{user.name}}!</h3></parallax>
+            <h3 class="title">Welcome {{this.$route.params.user.name}}!</h3></parallax>
         <div class="main main-raised">
             <div class="section profile-content">
                 <div class="container">
@@ -22,12 +22,14 @@
                                     <div>
                                         <h1>Your Complaints</h1>
                                         <md-button class="md-info md-round classic-modal" @click="classicModal=true">Add a Complaint</md-button>
-                                        <modal v-if="classicModel" @close="classicModalHide">
+                                        <modal v-if="classicModal" @close="classicModalHide">
 
                                             <template slot="body">
-                                                <AddComplaintForm/>
+                                                <add-Complaint-Form></add-Complaint-Form>
                                             </template>
-
+                                            <template slot="footer">
+                                                <md-button class="md-danger md-simple" @click="classicModalHide">Close</md-button>
+                                            </template>
                                         </modal>
                                     </div>
                                     <table class="table table-bordered table-hover">
@@ -68,8 +70,43 @@
 
 
 <script>
+    import {AddComplaintForm,Modal} from '@/components'
+    import {getUserComplaints} from "../repository";
     export default {
-        name: "User"
+        name: "User",
+        components: {
+            AddComplaintForm,
+            Modal
+        },
+        props: {
+            header: {
+                type: String,
+                default: require("@/assets/img/survey.jpg")
+            }
+        },
+        computed: {
+            headerStyle() {
+                return {
+                    backgroundImage: `url(${this.header})`
+                };
+            }
+        },
+        data(){
+            return{
+                classicModal: false,
+                user:{},
+                complaints:[]
+            }
+        },
+        methods: {
+            classicModalHide() {
+                this.classicModal = false;
+            }
+        },
+        mounted() {
+            //getCurrentUser().then(data=>this.user={id:data.id,name:data.name,email:data.email,IsAdmin:data.IsAdmin})
+            getUserComplaints(this.$route.params.user.name).then(data=>this.complaints=data.complaints)
+        }
     }
 </script>
 

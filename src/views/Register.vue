@@ -39,10 +39,10 @@
                                 <label>Email...</label>
                                 <md-input v-model="email" type="email"></md-input>
                             </md-field>
-                            <md-field class="md-form-group" slot="inputs" type="password">
+                            <md-field class="md-form-group" slot="inputs" >
                                 <md-icon>lock_outline</md-icon>
                                 <label>Password...</label>
-                                <md-input v-model="password"></md-input>
+                                <md-input v-model="password" type="password"></md-input>
                             </md-field>
                             <md-button slot="footer" class="md-success md-lg" v-on:click="register">
                                 Register
@@ -62,7 +62,7 @@
 
 <script>
     import { LoginCard } from "@/components";
-    import {register} from "../repository";
+    import {registerUser} from "../repository";
     import router from "../router"
 
     export default {
@@ -99,7 +99,7 @@ e.preventDefault()
                     email:this.email,
                     password: this.password
                 }
-                register(data).then((response)=>{
+                registerUser(data).then((response)=>{
                     console.log(response)
                     router.push("/login")
                 }).catch((err)=>{

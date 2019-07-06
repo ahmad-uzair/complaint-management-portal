@@ -1,14 +1,9 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Index from "./views/Index.vue";
-import Landing from "./views/Landing.vue";
 import User from "./views/User"
 import Admin from "./views/Admin"
 import Register from "./views/Register"
 import Login from "./views/Login.vue";
-import Profile from "./views/Profile.vue";
-import MainNavbar from "./layout/MainNavbar.vue";
-import MainFooter from "./layout/MainFooter.vue";
 
 Vue.use(Router);
 
@@ -17,7 +12,7 @@ export default new Router({
     {
       path: "/",
       name: "index",
-      components: { default: Login, header: MainNavbar, footer: MainFooter },
+      components: { default: Login},
       props: {
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: "black" }
@@ -26,7 +21,7 @@ export default new Router({
     {
       path: "/register",
       name: "register",
-      components: { default: Register, header: MainNavbar, footer: MainFooter },
+      components: { default: Register},
       props: {
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: "black" }
@@ -35,7 +30,7 @@ export default new Router({
     {
       path: "/login",
       name: "login",
-      components: { default: Login, header: MainNavbar, footer: MainFooter },
+      components: { default: Login},
       props: {
         header: { colorOnScroll: 400 }
       }
@@ -43,7 +38,7 @@ export default new Router({
     {
       path: "/admin",
       name: "admin",
-      components: { default: Admin, header: MainNavbar, footer: MainFooter },
+      components: { default: Admin},
       props: {
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: "black" }

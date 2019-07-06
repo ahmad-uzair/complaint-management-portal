@@ -62,16 +62,19 @@
 
 <script>
 import { LoginCard } from "@/components";
+import {loginUser} from "../repository";
+
 import router from '../router'
 export default {
+  name:'Login',
   components: {
     LoginCard
   },
   bodyClass: "login-page",
   data() {
     return {
-      email: null,
-      password: null
+      email: '',
+      password: ''
     };
   },
   props: {
@@ -87,16 +90,39 @@ export default {
       };
     }
   },
+    // methods: {
+    //     login: function () {
+    //         this.$auth.login({ email:this.email, password:this.password }).then(function () {
+    //             console.log("Logged In\n")
+    //             router.push('/user')
+    //         })
+    //     },
+    //
+    //     register: function () {
+    //         router.push('/register')
+    //             // Execute application logic after successful registration
+    //         }
+    //
+    // },
   methods:{
-    login:()=>{
-      let email=''
-      let password=''
+    login(e){
+      e.preventDefault()
+console.log("In login method")
       let data={
-        email:email,
-        password: password
+        email:this.email,
+        password: this.password
       }
-
-      router.push("/admin")
+loginUser(data).then((response)=>{
+  console.log(response)
+  if (response.IsAdmin) {
+    router.push({name: "admin", params: {user: response}})
+  }
+  else {
+    router.push({name: "user", params: {user: response}})
+  }
+}).catch((err)=>{
+        console.log(err)
+      })
     },
     register:()=>{
       router.push("/register")

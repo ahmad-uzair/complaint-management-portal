@@ -50,7 +50,7 @@ export function updateComplaint(data, id) {
 
 }
 
-export function register(data) {
+export function registerUser(data) {
     return axios.post(`${BASE_URL}/api/users/create`, { data })
 
         .then(response => {
@@ -62,8 +62,8 @@ export function register(data) {
         .catch(err => Promise.reject(err.message));
 }
 
-export function login(data) {
-    return axios.post(`${BASE_URL}/api/users/:email`, { data })
+export function loginUser(data) {
+    return axios.post(`${BASE_URL}/api/login`, { data })
 
         .then(response => {
 
@@ -72,4 +72,17 @@ export function login(data) {
         })
 
         .catch(err => Promise.reject(err.message));
+}
+
+export function getCurrentUser() {
+    return axios.get(`${BASE_URL}/api/users/current`)
+        .then(response=>response.data);
+}
+
+export function getUserComplaints(userData) {
+    return axios.post(`${BASE_URL}/api/complaint`, { userData })
+        .then(response=>{
+            return response.data
+        })
+
 }

@@ -1,4 +1,4 @@
-var mongoose = require('mongoose')
+const mongoose = require('mongoose')
 
 const status={
     UNR:'Unresolved',
@@ -14,7 +14,7 @@ const compType={
 
 
 // Define a schema for a complaint
-var complaint = new mongoose.Schema({
+const complaint = new mongoose.Schema({
         title: {
             type: String
         },
@@ -37,5 +37,5 @@ var complaint = new mongoose.Schema({
 );
 
 
-
-module.exports = mongoose.model('Complaint', complaint)
+var Complaint = mongoose.model('Complaint', complaint)
+module.exports =Complaint
